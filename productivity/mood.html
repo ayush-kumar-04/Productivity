@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker & Reflection Journal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        textarea, select, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #quoteDisplay {
+            font-style: italic;
+            margin-top: 20px;
+            color: #333;
+        }
+        .entry {
+            margin-top: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="moodContainer">
+        <h2>Mood Tracker & Reflection Journal</h2>
+        <select id="mood" onchange="changeMood()">
+            <option value="happy">😊 Happy</option>
+            <option value="sad">😢 Sad</option>
+            <option value="neutral">😐 Neutral</option>
+        </select>
+        <textarea id="reflection" placeholder="Write your reflection..."></textarea>
+        <button onclick="saveEntry()">Save Entry</button>
+        <button onclick="clearEntries()" style="background: #dc3545;">Clear Entries</button>
+        <p id="quoteDisplay"></p>
+        <div id="entries"></div>
+    </div>
+
+    <script>
+        let journalEntries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+        
+        const backgroundImages = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+        
+        const quotes = {
+            happy: [
+                "Happiness depends upon ourselves. - Aristotle", 
+                "The purpose of our lives is to be happy. - Dalai Lama", 
+                "Smile, breathe, and go slowly. - Thich Nhat Hanh", 
+                "Happiness is not something ready-made. It comes from your own actions. - Dalai Lama", 
+                "For every minute you are angry you lose sixty seconds of happiness. - Ralph Waldo Emerson"
+            ],
+            sad: [
+                "This too shall pass.", 
+                "Tough times never last, but tough people do. - Robert H. Schuller", 
+                "Even the darkest night will end and the sun will rise. - Victor Hugo", 
+                "You are never too old to set another goal or to dream a new dream. - C.S. Lewis", 
+                "Do not be embarrassed by your failures, learn from them and start again. - Richard Branson"
+            ],
+            neutral: [
+                "Balance is not something you find, it’s something you create.", 
+                "Every day is a second chance.", 
+                "Believe you can, and you're halfway there. - Theodore Roosevelt", 
+                "Do what you can, with what you have, where you are. - Theodore Roosevelt", 
+                "In the middle of every difficulty lies opportunity. - Albert Einstein"
+            ]
+        };
+        
+        function changeMood() {
+            displayRandomQuote(document.getElementById("mood").value);
+        }
+        
+        function saveEntry() {
+            const reflection = document.getElementById("reflection").value.trim();
+            if (!reflection) return;
+            
+            const mood = document.getElementById("mood").value;
+            const date = new Date().toLocaleDateString();
+            journalEntries.push({ date, mood, reflection });
+            localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
+            document.getElementById("reflection").value = "";
+            displayEntries();
+        }
+        
+        function clearEntries() {
+            localStorage.removeItem('journalEntries');
+            journalEntries = [];
+            displayEntries();
+        }
+        
+        function displayRandomQuote(mood) {
+            document.getElementById("quoteDisplay").textContent = `"${quotes[mood][Math.floor(Math.random() * quotes[mood].length)]}"`;
+        }
+        
+        function displayEntries() {
+            document.getElementById("entries").innerHTML = journalEntries.map(entry => 
+                `<div class="entry"><strong>${entry.date} - ${entry.mood}</strong><br>${entry.reflection}</div>`
+            ).join('');
+        }
+        
+        function setRandomBackground() {
+            document.body.style.backgroundImage = `url('${backgroundImages[Math.floor(Math.random() * backgroundImages.length)]}')`;
+        }
+        
+        setRandomBackground();
+        displayEntries();
+    </script>
+    <a href="main.html" class="home-button">Home</a>
+
+    <style>
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 10px 20px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        
+        .home-button:hover {
+            background: #e68900;
+        }
+    </style>
+    
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #3f067c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            background: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Enter a task...">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        function changeBackground() {
+            const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            document.body.style.backgroundImage = `url('${randomImage}')`;
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskText = taskInput.value.trim();
+            if (taskText === "") return;
+            
+            const taskList = document.getElementById("taskList");
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span onclick="toggleTask(this)">${taskText}</span>
+                <button onclick="removeTask(this)">❌</button>
+            `;
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+        
+        function removeTask(button) {
+            button.parentElement.remove();
+        }
+        
+        function toggleTask(task) {
+            task.classList.toggle("completed");
+        }
+        
+        window.onload = changeBackground;
+    </script>
+    <a href="main.html" class="home-button">Home</a>
+
+    <style>
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 10px 20px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        
+        .home-button:hover {
+            background: #e68900;
+        }
+    </style>
+    
+</body>
+</html>

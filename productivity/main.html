@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTIVITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #3f067c;
+            --secondary-color: #160d3e;
+            --background-light: #838987;
+            --background-dark: #2e2e47;
+            --text-light: #fdfdfd;
+            --text-dark: #0d0c0c;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            transition: background 0.3s, color 0.3s;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1.5em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #fff;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            padding: 14px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+        .main-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: #fff;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .main-section h1 {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+        .dark-mode {
+            background: var(--background-dark);
+            color: var(--text-light);
+        }
+        .toggle-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Boost Your Productivity</h1>
+        <p>Enhance focus, mindfulness, and efficiency</p>
+        <button class="toggle-btn" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="notes.html">Notes & Journal</a>
+        <a href="todo.html">To-Do List</a>
+        <a href="timer.html">Timer</a>
+        <a href="tracker.html">Time Tracker</a>
+        <a href="mood.html">Mood Tracker</a>
+    </nav>
+    <section class="main-section" id="home">
+        <h1>Productivity</h1>
+        <p>Productivity is the efficient use of time, energy, and resources to achieve goals effectively. 
+            It involves prioritization, time management, and focus. Techniques like time blocking, the Pomodoro Technique, and the Eisenhower Matrix help enhance efficiency, reduce distractions, and improve overall performance.</p>
+        <a href="learnmore.html" class="btn">Learn More</a>
+    </section>
+    <footer>
+        <p>Designed by Ayush | For Enhancing Productivity and Wellness</p>
+    </footer>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            let icon = document.querySelector('.toggle-btn i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+    </script>
+</body>
+</html>
